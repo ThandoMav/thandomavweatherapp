@@ -155,26 +155,6 @@ const {loading, setLoading} = useContext(MapCoordinates);
       ">Search</button>
     </form>
 
-    <div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 px-4 text-white z-10'>
-          <form
-            onSubmit={handleLocationSearchhh}
-            className='flex justify-between items-center w-full m-auto p-3 bg-transparent border border-gray-300 text-white rounded-2xl'
-          >
-            <input 
-      placeholder='Search city'
-      onChange={handleChangee}
-      type="text"
-      required
-      className="
-        w-full p-3 border border-gray-300
-        rounded-md focus:outline-none focus:ring-2
-        focus:ring-green-400"
-        />
-            <button onClick={handleLocationSearchhh}>
-              <BsSearch size={20} /> 
-            </button>
-          </form>
-        </div>
 
   </div>
   {!loading &&
