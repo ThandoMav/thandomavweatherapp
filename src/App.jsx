@@ -7,7 +7,6 @@ import { DailyWeatherCard } from "./components/DailyWeatherCard"
 import { Map } from "./components/Map"
 import { BsSearch } from 'react-icons/bs';
 import { MapCoordinates } from './context/CoordinatesContext';
-//import { CoordinatesContext } from './context/CoordinatesContext';
 import { toast } from 'react-toastify';
 
 const API_KEY = "0f140af0c51a5fd2890ecbbbe55d1203"
@@ -24,7 +23,6 @@ function App() {
     longitude: 0
   })
 
-//const { , city, setCity,   } = useCoordinatesContext();
 const {handleLocationSearchhh} = useContext(MapCoordinates);
 const {lat, setLat} = useContext(MapCoordinates);
 const {long, setLong} = useContext(MapCoordinates);
@@ -34,15 +32,9 @@ const {loading, setLoading} = useContext(MapCoordinates);
   const [currentData, setCurrentData] = useState({})
   const [hourlyData, setHourlyData] = useState([])
   const [dailyData, setDailyData] = useState([])
-  //const [loading, setLoading] = useState(true)
   const [timezone, setTimezone] = useState("")
   const [activeTab, setActiveTab] = useState("hourly")
-  //const [weather, setWeather] = useState({});
-
-  //const [city, setCity] = useState('');
-  //const [lat, setLat] = useState({});
-  //const [long, setLong] = useState({});
-
+  
   
   const {handleLocationSearchFromMap} = useContext(MapCoordinates);
     
@@ -50,30 +42,6 @@ const {loading, setLoading} = useContext(MapCoordinates);
     handleLocationSearchFromMap();
 
   }, []);
-
-/*
-  async function handleLocationSearchh(e) {
-    e.preventDefault()
-    setLoading(true);
-    let response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`)
-    
-    setLoading(false)
-    setMapCoordinates(coordinates)
-
-    setWeather(response.data);
-    //console.log(coordinates)
-       console.log(response.data);
-      //console.log(response.data)  
-      //console.log(response.data.current)
-      console.log(response.data.timezone)
-      console.log(response.data.coord.lat)
-      console.log(response.data.coord.lon)
-      setLat({response.data.coord.lat})
-      setLong(response.data.coord.lon)
-      setTimezone(response.data.timezone)
-  }
-*/
-
 
   async function handleLocationSearch(e) {
     e.preventDefault()
