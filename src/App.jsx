@@ -121,12 +121,12 @@ const {loading, setLoading} = useContext(MapCoordinates);
       className="
         w-full p-3 border border-gray-300
         rounded-md focus:outline-none focus:ring-2
-        focus:ring-blue-400"
+        focus:ring-green-400"
         />
       
       <button type="submit" className="w-full
-      bg-blue-500 text-white font-semibold
-      py-3 rounded-md hover:bg-blue-600 flex align-center justify-center gap-2
+      bg-green-500 text-white font-semibold
+      py-3 rounded-md hover:bg-green-600 flex align-center justify-center gap-2
       ">Search <BsSearch size={20} /> </button>
     </form>
 
@@ -165,7 +165,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
       className="
         w-full p-3 border border-gray-300
         rounded-md focus:outline-none focus:ring-2
-        focus:ring-blue-400"
+        focus:ring-green-400"
         />
       <input 
       placeholder={"Longitude"} 
@@ -179,11 +179,11 @@ const {loading, setLoading} = useContext(MapCoordinates);
       className="
         w-full p-3 border border-gray-300
         rounded-md focus:outline-none focus:ring-2
-        focus:ring-blue-400"
+        focus:ring-green-400"
         />
       <button type="submit" className="w-full
-      bg-blue-500 text-white font-semibold
-      py-3 rounded-md hover:bg-blue-600
+      bg-green-500 text-white font-semibold
+      py-3 rounded-md hover:bg-green-600
       ">Search</button>
     </form>
 
@@ -200,7 +200,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
       className="
         w-full p-3 border border-gray-300
         rounded-md focus:outline-none focus:ring-2
-        focus:ring-blue-400"
+        focus:ring-green-400"
         />
             <button onClick={handleLocationSearchhh}>
               <BsSearch size={20} /> 
@@ -222,8 +222,8 @@ const {loading, setLoading} = useContext(MapCoordinates);
       </div>
     </div>
     <div className="flex justify-center space-x-4 mb-6 mt-24">
-      <button onClick={() => setActiveTab("hourly")} className={`px-4 py-2 rounded-md ${activeTab === "hourly" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}>Hourly Forecast</button>
-      <button onClick={() => setActiveTab("daily")} className={`px-4 py-2 rounded-md ${activeTab === "daily" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}>Daily Forecast</button>
+      <button onClick={() => setActiveTab("hourly")} className={`px-4 py-2 rounded-md ${activeTab === "hourly" ? "bg-green-500 text-white" : "bg-gray-200 text-gray-700"}`}>Hourly Forecast</button>
+      <button onClick={() => setActiveTab("daily")} className={`px-4 py-2 rounded-md ${activeTab === "daily" ? "bg-green-500 text-white" : "bg-gray-200 text-gray-700"}`}>Daily Forecast</button>
     </div>
     <div className="flex justify-center mb-48">
       {activeTab === "hourly" && (
