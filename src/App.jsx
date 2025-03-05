@@ -179,7 +179,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
   </div>
   {!loading &&
   <div>
-    <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 mt-8 gap-[30px] mt-16 flex flex-row justify-center space-x-12">
+    <div className=" mt-16 flex flex-col  md:flex-row justify-center space-x-12">
       <div>
         <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">Current Weather</h3>
         <CurrentWeatherCardSec weatherData={weather} />
