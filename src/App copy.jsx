@@ -12,13 +12,13 @@ const API_KEY = "0f140af0c51a5fd2890ecbbbe55d1203"
 function App() {
 
   const [coordinates, setCoordinates] = useState({
-    latitude: 0,
-    longitude: 0
+    latitude: 25.4753,
+    longitude: 30.9694
   })
 
   const [mapCoordinates, setMapCoordinates] = useState({
-    latitude: 0,
-    longitude: 0
+    latitude: 25.4753,
+    longitude: 30.9694
   })
 
 
@@ -28,34 +28,34 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [timezone, setTimezone] = useState("")
   const [activeTab, setActiveTab] = useState("hourly")
-  const [weather, setWeather] = useState({});
+
 
   const [city, setCity] = useState('');
   const [lat, setLat] = useState({});
   const [long, setLong] = useState({});
 
-  
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 
-  async function handleLocationSearchh(e) {
-    e.preventDefault()
+  const fetchWeather = (e) => {
+    e.preventDefault();
     setLoading(true);
-    let response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`)
-    
-    setLoading(false)
-    setMapCoordinates(coordinates)
-
-    setWeather(response.data);
-    //console.log(coordinates)
-       console.log(response.data);
+    axios.get(url).then((response) => {
+      setWeather(response.data);
+      // console.log(response.data);
       //console.log(response.data)  
-      //console.log(response.data.current)
+      console.log(response.data.current)
       console.log(response.data.timezone)
       console.log(response.data.coord.lat)
       console.log(response.data.coord.lon)
       setLat(response.data.coord.lat)
       setLong(response.data.coord.lon)
-      setTimezone(response.data.timezone)
-  }
+    });
+    setCity('');
+    setMapCoordinates(coordinates)
+    setLoading(false);
+  };
+
+
 
 
 
@@ -77,57 +77,13 @@ function App() {
 
   function handleChangee(e) {
     setCity(e.target.value);
+    setCoordinates({... coordinates, latitude: lat, longitude: long });
   }
-
-
- 
-
+  
   return (
-    
 <div className="w-screen h-screen flex flex-col bg-gradient-to-b from-blue-300 to-white">
-{/*MAP 1*/}
-  <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4 mt-16">Search Location Weather</h3>
+  <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4 mt-16">Latitude/Longitude Search</h3>
   <div className="mx-auto p-6 bg-white shadow-md rounded-lg">
-    <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Find the weather, anywhere in the world!</h2>
-    <form onSubmit={handleLocationSearchh} className="space-y-4">
-      <input 
-      placeholder='Search city'
-      onChange={handleChangee}
-      type="text"
-      required
-      className="
-        w-full p-3 border border-gray-300
-        rounded-md focus:outline-none focus:ring-2
-        focus:ring-blue-400"
-        />
-      
-      <button type="submit" className="w-full
-      bg-blue-500 text-white font-semibold
-      py-3 rounded-md hover:bg-blue-600 flex align-center justify-center gap-2
-      ">Search <BsSearch size={20} /> </button>
-    </form>
-
-  </div>
-  {!loading &&
-  <div>
-    <div className="mt-16 flex flex-row justify-center space-x-12">
-      <div>
-        <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">Current Weather</h3>
-        
-        <CurrentWeatherCardSec weatherData={weather} />
-      </div>
-      <div>
-        <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">Location Map</h3>
-        <Map latitude={lat} longitude={long}/>
-      </div>
-    </div>
-    
-  </div>
-  }
-
- {/*MAP 2*/}
- <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4 mt-16">Latitude/Longitude Search</h3>
-  <div className="mx-auto p-6 bg-white shadow-md rounded-lg ">
     <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Find the weather, anywhere in the world!</h2>
     <form onSubmit={handleLocationSearch} className="space-y-4">
       <input 
@@ -166,32 +122,31 @@ function App() {
 
     <div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 px-4 text-white z-10'>
           <form
-            onSubmit={handleLocationSearchh}
+            onSubmit={fetchWeather}
             className='flex justify-between items-center w-full m-auto p-3 bg-transparent border border-gray-300 text-white rounded-2xl'
           >
-            <input 
-      placeholder='Search city'
-      onChange={handleChangee}
-      type="text"
-      required
-      className="
-        w-full p-3 border border-gray-300
-        rounded-md focus:outline-none focus:ring-2
-        focus:ring-blue-400"
-        />
-            <button onClick={handleLocationSearchh}>
-              <BsSearch size={20} /> 
+            <div>
+              <input
+                onChange={handleChangee}
+                className='bg-transparent border-none text-white focus:outline-none text-2xl'
+                type='text'
+                placeholder='Search city'
+              />
+            </div>
+            <button onClick={fetchWeather}>
+              <BsSearch size={20} />
             </button>
           </form>
         </div>
 
   </div>
   {!loading &&
-  <div>
+  <>
     <div className="mt-16 flex flex-row justify-center space-x-12">
       <div>
         <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">Current Weather</h3>
-        <CurrentWeatherCardSec weatherData={weather} />
+        <CurrentWeatherCard weatherData={currentData} timezone={timezone}/>
+        <CurrentWeatherCardSec weatherData={currentData} timezone={timezone}/>
       </div>
       <div>
         <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">Location Map</h3>
@@ -218,10 +173,8 @@ function App() {
         </div>
       )}
     </div>
-  </div>
+  </>
   }
- 
-
 </div>
   )
 }
