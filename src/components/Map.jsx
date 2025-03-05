@@ -21,6 +21,12 @@ const MapEvents = () => {
         handleLocationSearchFromMap();
         const {lat, setLat} = useContext(MapCoordinates);
         const {long, setLong} = useContext(MapCoordinates);
+
+        if (!window.alert(`Map select loctation Lat: ${lat} Long: ${long}`)) {
+            return;
+          }
+
+
         const {handleLocationSearchFromMap} = useContext(MapCoordinates);
         
         console.log(e.latlng.lat);

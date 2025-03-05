@@ -20,7 +20,8 @@ export function CurrentWeatherCardSec( {weatherData} ) {
                 <div className="text-center mb-4">
                     <p className="text-xl font-medium text-gray-900">{weatherData.name}</p>
                     <p className="text-xl font-medium text-gray-700">{weatherData.weather[0].main}</p>
-                 </div>
+                    <p className="text-xl font-medium text-gray-700">{weatherData.weather[0].description}</p>
+                </div>
                 <ul className="space-y-2">
                     
                     <li className="flex justify-between">

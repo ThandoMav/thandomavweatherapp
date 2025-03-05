@@ -107,7 +107,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
 
   return (
     
-<div className="w-screen h-screen flex flex-col bg-gradient-to-b from-blue-300 to-white">
+<div className="w-screen h-screen flex flex-col bg-white">
 {/*MAP 1*/}
   <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4 mt-16">Search Location Weather</h3>
   <div className="mx-auto p-6 bg-white shadow-md rounded-lg">
