@@ -101,7 +101,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
   </div>
   {!loading &&
   <div>
-    <div className="mt-16 flex flex-col  md:flex-row justify-center align-center space-x-12 gap-2">
+    <div className="mt-16 flex flex-col  md:flex-row justify-center align-center space-x-12 gap-2 px-6">
       <div>
         <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">Current Weather</h3>
         
