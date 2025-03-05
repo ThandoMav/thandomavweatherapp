@@ -119,7 +119,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
  {/*MAP 2*/}
  <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4 mt-16">Latitude/Longitude Search</h3>
   <div className="mx-auto p-6 bg-white shadow-md rounded-lg ">
-    <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Find the weather, anywhere in the world!</h2>
+    <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Find the weather, anywhere in the world! by coordinates</h2>
     <form onSubmit={handleLocationSearch} className="space-y-4">
       <input 
       placeholder={"Latitude"} 
