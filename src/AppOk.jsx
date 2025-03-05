@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useState } from "react"
 import axios from "axios"
 import { CurrentWeatherCard } from "./components/CurrentWeatherCard"
 import { CurrentWeatherCardSec } from "./components/CurrentWeatherCardSec"
@@ -6,9 +6,7 @@ import { HourlyWeatherCard } from "./components/HourlyWeatherCard"
 import { DailyWeatherCard } from "./components/DailyWeatherCard"
 import { Map } from "./components/Map"
 import { BsSearch } from 'react-icons/bs';
-import { MapCoordinates } from './context/CoordinatesContext';
-//import { CoordinatesContext } from './context/CoordinatesContext';
-import { toast } from 'react-toastify';
+import { useCoordinatesContext } from './context/CoordinatesContext';
 
 const API_KEY = "0f140af0c51a5fd2890ecbbbe55d1203"
 
@@ -24,34 +22,23 @@ function App() {
     longitude: 0
   })
 
-//const { , city, setCity,   } = useCoordinatesContext();
-const {handleLocationSearchhh} = useContext(MapCoordinates);
-const {lat, setLat} = useContext(MapCoordinates);
-const {long, setLong} = useContext(MapCoordinates);
-const {city, setCity} = useContext(MapCoordinates);
-const {weather, setWeather} = useContext(MapCoordinates);
-const {loading, setLoading} = useContext(MapCoordinates);
+const { lat, long, setLat, setLong, } = useCoordinatesContext();
+
+
   const [currentData, setCurrentData] = useState({})
   const [hourlyData, setHourlyData] = useState([])
   const [dailyData, setDailyData] = useState([])
-  //const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [timezone, setTimezone] = useState("")
   const [activeTab, setActiveTab] = useState("hourly")
-  //const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState({});
 
-  //const [city, setCity] = useState('');
+  const [city, setCity] = useState('');
   //const [lat, setLat] = useState({});
   //const [long, setLong] = useState({});
 
   
-  const {handleLocationSearchFromMap} = useContext(MapCoordinates);
-    
-  useEffect(() => {
-    handleLocationSearchFromMap();
 
-  }, []);
-
-/*
   async function handleLocationSearchh(e) {
     e.preventDefault()
     setLoading(true);
@@ -68,30 +55,23 @@ const {loading, setLoading} = useContext(MapCoordinates);
       console.log(response.data.timezone)
       console.log(response.data.coord.lat)
       console.log(response.data.coord.lon)
-      setLat({response.data.coord.lat})
+      setLat(response.data.coord.lat)
       setLong(response.data.coord.lon)
       setTimezone(response.data.timezone)
   }
-*/
+
 
 
   async function handleLocationSearch(e) {
     e.preventDefault()
 
     let response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&units=imperial&appid=${API_KEY}`)
-    
-    if(response){
-      setCurrentData(response.data.current)
-      setHourlyData(response.data.hourly)
-      setDailyData(response.data.daily)
-      setTimezone(response.data.timezone)
-      setLoading(false)
-      setMapCoordinates(coordinates)
-      toast.success('Successful');
-    }else{
-      toast.error('Server Error');
-    }
-    
+    setCurrentData(response.data.current)
+    setHourlyData(response.data.hourly)
+    setDailyData(response.data.daily)
+    setTimezone(response.data.timezone)
+    setLoading(false)
+    setMapCoordinates(coordinates)
   }
 
   function handleChange(e) {
@@ -112,7 +92,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
   <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4 mt-16">Search Location Weather</h3>
   <div className="mx-auto p-6 bg-white shadow-md rounded-lg">
     <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Find the weather, anywhere in the world!</h2>
-    <form onSubmit={handleLocationSearchhh} className="space-y-4">
+    <form onSubmit={handleLocationSearchh} className="space-y-4">
       <input 
       placeholder='Search city'
       onChange={handleChangee}
@@ -189,7 +169,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
 
     <div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 px-4 text-white z-10'>
           <form
-            onSubmit={handleLocationSearchhh}
+            onSubmit={handleLocationSearchh}
             className='flex justify-between items-center w-full m-auto p-3 bg-transparent border border-gray-300 text-white rounded-2xl'
           >
             <input 
@@ -202,7 +182,7 @@ const {loading, setLoading} = useContext(MapCoordinates);
         rounded-md focus:outline-none focus:ring-2
         focus:ring-blue-400"
         />
-            <button onClick={handleLocationSearchhh}>
+            <button onClick={handleLocationSearchh}>
               <BsSearch size={20} /> 
             </button>
           </form>

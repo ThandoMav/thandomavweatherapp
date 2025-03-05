@@ -1,8 +1,6 @@
-import { useState, useContext } from "react"
 import { MapContainer, TileLayer, Marker, Popup, useMap,useMapEvents } from "react-leaflet"
 import 'leaflet/dist/leaflet.css'
 import { useEffect } from "react"
-import { MapCoordinates } from '../context/CoordinatesContext';
 
 function MapUpdater({latitude, longitude}) {
     const map = useMap()
@@ -17,26 +15,14 @@ const MapEvents = () => {
       click(e) {
         // setState your coords here
         // coords exist in "e.latlng.lat" and "e.latlng.lng"
-        //const { setLat, setLong, handleLocationSearchFromMap } = useCoordinatesContext();
-        handleLocationSearchFromMap();
-        const {lat, setLat} = useContext(MapCoordinates);
-        const {long, setLong} = useContext(MapCoordinates);
-        const {handleLocationSearchFromMap} = useContext(MapCoordinates);
-        
         console.log(e.latlng.lat);
         console.log(e.latlng.lng);
-        setLat(e.latlng.lat);
-        setLong(e.latlng.lng);
-        
       },
     });
     return false;
 }
 
 export function Map({latitude, longitude}) {
-
-    //const { lat, long, setLat, setLong, } = useCoordinatesContext();
-
     return(
         <div>
             <MapContainer 
